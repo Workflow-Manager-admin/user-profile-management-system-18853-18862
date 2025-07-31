@@ -1,0 +1,89 @@
+<div class="dashboard-bg">
+  <header class="dashboard-header">
+    <div class="header-title">
+      Profile Management
+    </div>
+  </header>
+
+  <main class="dashboard-content">
+    <section class="info-cards-row">
+      <div class="info-card" *ngFor="let card of cards">
+        <div class="info-card-title">{{card.title}}</div>
+        <div class="info-card-value">{{card.value}}</div>
+        <div class="info-card-badge">{{card.badge}}</div>
+      </div>
+    </section>
+
+    <section class="profile-toolbar">
+      <div class="filter-tabs">
+        <button
+          *ngFor="let filter of filters"
+          [ngClass]="{'active': selectedFilter === filter}"
+          (click)="selectFilter(filter)">
+          {{filter}}
+        </button>
+      </div>
+      <div class="search-create-row">
+        <input
+          class="search-input"
+          type="text"
+          [(ngModel)]="search"
+          placeholder="Search profiles…">
+        <button class="create-profile-btn" (click)="onCreateProfile()">
+          + Create Profile
+        </button>
+      </div>
+    </section>
+
+    <section class="profile-table-section">
+      <table class="profile-table">
+        <thead>
+          <tr>
+            <th>Profile Name</th>
+            <th>Devices</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Created Date</th>
+            <th class="actions-col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of filteredProfiles">
+            <td>{{row.name}}</td>
+            <td>{{row.devices}}</td>
+            <td>
+              <span class="pill"
+                [ngClass]="{'type-impromptu': row.type==='Impromptu', 'type-schedule': row.type==='Schedule'}">
+                {{row.type}}
+              </span>
+            </td>
+            <td>
+              <span class="pill"
+                [ngClass]="{'status-active': row.status==='Active', 'status-inactive': row.status==='Inactive'}">
+                {{row.status}}
+              </span>
+            </td>
+            <td>{{row.createdDate}}</td>
+            <td class="actions-col">
+              <button class="icon-action" title="Edit" (click)="onEdit(row)">
+                <svg viewBox="0 0 20 20" fill="none" width="20" height="20">
+                  <path d="M4 13.5V16h2.5L15.28 7.72a1 1 0 0 0-1.41-1.41L5.5 14.59zm10.71-7.29a2 2 0 0 1 0 2.83l-1.39 1.39-2.83-2.83 1.39-1.39a2 2 0 0 1 2.83 0z" fill="#1976d2"/>
+                </svg>
+              </button>
+              <button class="icon-action" title="Download" (click)="onDownload(row)">
+                <svg viewBox="0 0 20 20" fill="none" width="20" height="20">
+                  <path d="M9 3h2v7h3l-4 4-4-4h3V3zm-5 12h12v2H4v-2z" fill="#1976d2"/>
+                </svg>
+              </button>
+              <button class="icon-action" title="Delete" (click)="onDelete(row)">
+                <svg viewBox="0 0 20 20" fill="none" width="20" height="20">
+                  <path d="M6 7v7m4-7v7m-6 4V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v13H4zm3-13V3" stroke="#fb7185" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+</div>
