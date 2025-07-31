@@ -8,7 +8,8 @@
     </div>
   </header>
 
-  <main class="dashboard-content">
+  <!-- Info cards placed directly and tightly beneath the main header, outside of dashboard-content -->
+  <div class="info-cards-wrapper">
     <section class="info-cards-row">
       <div class="info-card" *ngFor="let card of cards">
         <div class="info-card-title">{{card.title}}</div>
@@ -16,7 +17,9 @@
         <div class="info-card-badge">{{card.badge}}</div>
       </div>
     </section>
+  </div>
 
+  <main class="dashboard-content">
     <section class="profile-toolbar">
       <div class="filter-tabs">
         <button
